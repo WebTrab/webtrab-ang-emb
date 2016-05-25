@@ -1,0 +1,54 @@
+﻿<script src='script/angular.js'></script>
+
+<h2>Exemplo4 - Filtros em uma lista com ANGULAR.JS</h2>
+<h4>Filtrando dinâmicamente os dados de uma lista com base na pesquisa do usuário</h4>
+
+<div ng-app="myApp">
+    <div ng-controller="exemplo4">
+        <label for='inputField'>Filtrar por: </label><input id='inputField' type='text' ng-model='dataFilter' /><br />
+        <br />
+        <table border=1>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Colégio</th>
+                <th>Cidade</th>
+            </tr>
+            <tr ng-repeat='n in alunosList | filter:dataFilter'>
+                <td>{{n.name}}</td>
+                <td>{{n.surname}}</td>
+                <td>{{n.school}}</td>
+                <td>{{n.city}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('exemplo4', ['$scope', function ($scope) {
+        $scope.alunosList = [
+			{ name: "Stephan", surname: "Korb", school: "UNASP", city: "Blumenau" },
+			{ name: "Karine", surname: "Paroschi", school: "UNASP", city: "Campinas" },
+			{ name: "Bruno", surname: "Silva", school: "UNASP", city: "São Paulo" },
+			{ name: "Guilherme", surname: "Aragão", school: "UNIP", city: "Limeira" },
+			{ name: "Henrique", surname: "Abud", school: "ESPM", city: "Rio de Janeiro" },
+			{ name: "Lucas", surname: "Bartowski", school: "UNASP", city: "Aimorés" },
+			{ name: "Rogério", surname: "Mattos", school: "UNASP", city: "Paraupebas" },
+			{ name: "William", surname: "Gates", school: "Harvard", city: "Seattle" },
+			{ name: "Steve", surname: "Jobs", school: " ", city: "São Francisco" },
+			{ name: "Mark", surname: "Zuckerberg", school: "Harvard", city: "White Plains" },
+			{ name: "Carlos", surname: "Norris", school: "Eastfield College", city: "Ryan" },
+			{ name: "Anakin", surname: "Skywalker", school: "Obi-Wan Personal Academy", city: "Tatooine" },
+        ]
+
+        $scope.dataFilter = "";
+    }]);
+</script>
+
+<style>
+    td {
+        width: 200px;
+    }
+</style>

@@ -1,0 +1,40 @@
+﻿<script src='script/angular.js'></script>
+
+<h2>Exemplo3 - NG-REPEAT</h2>
+<h4>Adicionando elementos à uma lista de forma dinâmica com ng-repeat</h4>
+
+<div ng-app="myApp">
+    <div ng-controller="exemplo3">
+        <label style="font-weight: 300; color: red">{{warning}}</label><br />
+        <input type="text" ng-change="removeWarning()" ng-model="object" placeholder="Insira algo aqui..." /><input type="button" ng-click="insertIntoTable()" value="Adicionar" />
+        <br />
+        <br />
+        <ul>
+            <li ng-repeat="n in list track by $index">{{n}}</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('exemplo3', ['$scope', function ($scope) {
+        $scope.object = "";
+        $scope.warning = "";
+        $scope.list = [];
+
+        $scope.insertIntoTable = function () {
+            if ($scope.object != "") {
+                $scope.list.push($scope.object);
+                $scope.object = "";
+            }
+            else {
+                $scope.warning = "Preencha com algum valor"
+            }
+        }
+
+        $scope.removeWarning = function () {
+            $scope.warning = "";
+        }
+    }]);
+</script>

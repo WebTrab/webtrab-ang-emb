@@ -1,0 +1,12 @@
+﻿<script src='script/angular.js'></script>
+
+<h2>Exemplo1 - Utilizção básica do NG-MODEL</h2>
+<h4>Lendo os dados de um textbox e o mostrando dinâmicamente utilizando o NG-MODEL</h4>
+<br/>
+<div ng-app>
+    <label>Name:</label>
+    <input type="text" ng-model="yourName" placeholder="Enter a name here">
+    <hr />
+
+    <h1>Sua frase: {{yourName}}</h1>
+</div>

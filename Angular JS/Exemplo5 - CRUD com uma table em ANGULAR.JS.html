@@ -1,0 +1,169 @@
+﻿<script src='script/angular.js'></script>
+
+<h2>Exemplo5 - CRUD com uma table em ANGULAR.JS</h2>
+<h4>Inserindo, visualizando, atualizando e removendo dados de uma tabela</h4>
+
+<div ng-app="myApp">
+    <div ng-controller="exemplo5">
+        <div class="main-container">
+            <table class="tableRow" border='1'>
+                <tr>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Idade</th>
+                    <th>Curso</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat='n in objectList track by $index'>
+                    <td>{{n.name}}</td>
+                    <td>{{n.surname}}</td>
+                    <td>{{n.age}}</td>
+                    <td>{{n.course}}</td>
+                    <td><a href='' ng-click='alterar($index)'>Alterar</a></td>
+                    <td><a href='' ng-click='delete($index)'>Delete</a></td>
+                </tr>
+            </table>
+        </div>
+        <div class="main-container">
+            <h3>Operação: {{action}}</h3>
+            <table>
+                <tr>
+                    <td>
+                        <label>Nome</label>
+                    </td>
+                    <td>
+                        <input type='text' ng-model='name' />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Sobrenome</label>
+                    </td>
+                    <td>
+                        <input type='text' ng-model='surname' />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Idade</label>
+                    </td>
+                    <td>
+                        <input type='text' ng-model='age' />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Curso</label>
+                    </td>
+                    <td>
+                        <input type='text' ng-model='course' />
+                    </td>
+                </tr>
+            </table>
+            <input type='button' ng-click='cancelupdate()' value='Cancelar' ng-disabled='enableCancel' />
+            <input type='button' ng-click='addToObjectList()' value='Gravar' />
+            <p class="notification">{{warning}}</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('exemplo5', ['$scope', function ($scope) {
+        $scope.name = "";
+        $scope.surname = "";
+        $scope.age = "";
+        $scope.course = "";
+        $scope.index = null;
+
+        $scope.warning = "";
+        $scope.action = "Adicionar";
+        //$scope.enableCancel = 0;
+
+        $scope.objectList = [
+			{ name: 'Stephan', surname: 'Korb', age: 23, course: 'Ciencia da Computacao' },
+			{ name: 'Karine', surname: 'Paroschi', age: 20, course: 'Ciencia da Computacao' }
+        ];
+
+        $scope.addToObjectList = function () {
+            if ($scope.name != "" && $scope.surname != "" && $scope.age != "" && $scope.course != "") {
+                if ($scope.index != null) {
+                    $scope.objectList[$scope.index].name = $scope.name;
+                    $scope.objectList[$scope.index].surname = $scope.surname;
+                    $scope.objectList[$scope.index].age = $scope.age;
+                    $scope.objectList[$scope.index].course = $scope.course;
+                }
+                else {
+                    $scope.objectList.push({ name: $scope.name, surname: $scope.surname, age: $scope.age, course: $scope.course });
+                }
+                $scope.reset();
+            }
+            else {
+                $scope.warning = "Preencha todos os campos"
+            }
+        }
+
+        $scope.alterar = function (index) {
+            $scope.index = index;
+            $scope.name = $scope.objectList[index].name;
+            $scope.surname = $scope.objectList[index].surname;
+            $scope.age = $scope.objectList[index].age;
+            $scope.course = $scope.objectList[index].course;
+            $scope.action = "Alterar";
+            $scope.enableCancel = false;
+        }
+
+        $scope.delete = function (index) {
+            $scope.objectList.splice(index, 1);
+        }
+
+        $scope.cancelupdate = function () {
+            $scope.reset();
+        }
+
+        $scope.reset = function () {
+            $scope.name = "";
+            $scope.surname = "";
+            $scope.age = "";
+            $scope.course = "";
+            $scope.index = null;
+            $scope.action = "Adicionar";
+            $scope.enableCancel = true;
+            //$scope.enableCancel = 1;
+        }
+        $scope.reset();
+
+        $scope.removeWarning = function () {
+            $scope.warning = "";
+        }
+
+        $scope.setToDelete = function () {
+        }
+
+    }]);
+</script>
+
+<style>
+    .main-container {
+        float: left;
+        margin: 25px;
+    }
+
+    .text-input {
+        margin: 5px;
+    }
+
+    p.notification {
+        color: red;
+    }
+
+    .tableRow tr:nth-child(odd) {
+        background-color: #dfe3ff;
+    }
+
+    .tableRow tr:nth-child(even) {
+        background-color: #ffffff;
+    }
+</style>

@@ -1,0 +1,26 @@
+﻿<script src='script/angular.js'></script>
+
+<h2>Exemplo2 - Controller, Fuções e Eventos com ANGULAR.JS</h2>
+<h4>Capturando a posição de um click dentro de uma DIV</h4>
+
+<div ng-app="myApp">
+    <div ng-controller="exemplo2">
+	<div><h3>CLIQUE EM ALGUM LUGAR NO QUADRADO VERMELHO</h3></div>
+        <div ng-click="getDivClickPosition($event)" style="width: 300px; height: 300px; background-color: red"></div>
+        <div>
+            <label>Posição X:</label>{{positionx}}<br />
+            <label>Posição Y:</label>{{positiony}}
+        </div>
+    </div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', []);
+
+    myApp.controller('exemplo2', ['$scope', function ($scope) {
+        $scope.getDivClickPosition = function (event) {
+            $scope.positionx = " "+event.offsetX;
+            $scope.positiony = " "+event.offsetY;
+        }
+    }]);
+</script>
