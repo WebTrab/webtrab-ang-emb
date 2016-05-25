@@ -1,0 +1,37 @@
+<h3> Artistas </h3>
+
+<div>
+ <label>Nome:</label>
+ {{input type="text" value=name }}
+ <p><label>Gênero:</label>
+ {{input type="text" value=genero}}</p>
+ <label>Músicas:</label>
+ {{input type="text" value=musicas}}
+</div>
+<p></p>
+    {{#each model as |artista|}}
+    <table border="1">
+    <TR>
+    		
+    		<TD ALIGN=MIDDLE WIDTH=100><h4>{{artista.nome}}</h4></TD> 
+
+    		<TD ALIGN=MIDDLE WIDTH=100>Gênero: {{artista.genero}}</TD>
+    		<TD ALIGN=MIDDLE WIDTH=100>{{artista.qtd_musicas}} Músicas</TD>
+    		
+    	</TR>
+    	</table>
+
+    {{else}}
+    	Nenhum artista encontrado.
+    {{/each}}
+    <table border="1">
+    <TR>
+    		
+    		<TD ALIGN=MIDDLE WIDTH=100><h4>{{name}}</h4></TD> 
+
+    		<TD ALIGN=MIDDLE WIDTH=100>Gênero: {{genero}}</TD>
+    		<TD ALIGN=MIDDLE WIDTH=100>{{musicas}} Músicas</TD>
+    	</TR>
+    	</table>
+    
+

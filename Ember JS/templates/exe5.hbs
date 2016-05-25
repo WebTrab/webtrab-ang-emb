@@ -1,0 +1,15 @@
+<h3> Artistas </h3>
+
+    {{#each model as |artista|}}
+    	<div>
+    		<h4>{{artista.nome}}</h4> 
+    		gênero: {{artista.genero}} <br>
+    		{{artista.qtd_musicas}} músicas.
+
+    		<p> <button class="btn btn-danger" {{action 'remover' this}}> remover </button> </p>
+
+    	</div>
+    {{else}}
+    	Nenhum artista encontrado.
+    {{/each}}
+
